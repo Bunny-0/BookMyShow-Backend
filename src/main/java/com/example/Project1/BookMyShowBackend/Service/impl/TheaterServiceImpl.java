@@ -30,6 +30,7 @@ public class TheaterServiceImpl implements TheaterService {
             theaterSeatsEntity.setTheater(theaterEntity);
         }
         theaterRepository.save(theaterEntity);
+
         return theaterDto;
 
     }

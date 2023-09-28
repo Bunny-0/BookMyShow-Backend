@@ -9,6 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 
 public class MovieServiceImpl implements MovieService {
@@ -21,6 +24,13 @@ public class MovieServiceImpl implements MovieService {
         if(movieDto.getId()<0){
             throw new EntityNotFoundException("movie can't be found");
         }
+        List<MovieEntity> list=movieRepsitory.findAll();
+        for(MovieEntity movie : list){
+            if(movie.getName().equalsIgnoreCase(movieDto.getName())){
+                throw new EntityNotFoundException("Record already exists");
+            }
+        }
+
         log.info("Adding the movie",movieDto);
         MovieEntity movieEntity= MovieConvertor.convertDtoToEntity(movieDto);
         movieRepsitory.save(movieEntity);
