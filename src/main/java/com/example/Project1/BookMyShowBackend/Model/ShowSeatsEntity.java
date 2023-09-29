@@ -45,8 +45,7 @@ public class ShowSeatsEntity {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "booked_at")
-    private Date bookedAt;
-
+    private Date BookedAt;
     @ManyToOne
     @JsonIgnore
     private ShowEntity show;

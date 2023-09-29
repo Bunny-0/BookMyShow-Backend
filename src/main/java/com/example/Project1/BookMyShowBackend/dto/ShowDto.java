@@ -3,6 +3,7 @@ package com.example.Project1.BookMyShowBackend.dto;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 public class ShowDto {
     int id;
     LocalDate showDate;
-    LocalDate showTime;
+    LocalTime showTime;
 
     MovieDto movieDto;
     TheaterDto theaterDto;

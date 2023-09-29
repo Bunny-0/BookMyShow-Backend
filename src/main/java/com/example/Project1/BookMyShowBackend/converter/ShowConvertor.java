@@ -5,11 +5,8 @@ import com.example.Project1.BookMyShowBackend.dto.ShowDto;
 
 public class ShowConvertor {
     public static ShowEntity convertDtoToEntity(ShowDto showDto){
-        return ShowEntity.builder().showDate(showDto.getShowDate()).showTime(showDto.getShowTime()).build();
-
-    }
-
-    public static ShowEntity convertEntityToDto(ShowEntity showEntity){
+        return ShowEntity.builder().showDate(showDto.getShowDate()).showTime(showDto.getShowTime())
+                .build();
 
     }
 }
