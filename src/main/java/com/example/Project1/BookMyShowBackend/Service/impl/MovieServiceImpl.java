@@ -4,7 +4,9 @@ import com.example.Project1.BookMyShowBackend.Model.MovieEntity;
 import com.example.Project1.BookMyShowBackend.Repository.MovieRepsitory;
 import com.example.Project1.BookMyShowBackend.Service.MovieService;
 import com.example.Project1.BookMyShowBackend.converter.MovieConvertor;
+import com.example.Project1.BookMyShowBackend.dto.EntryRequest.MovieEntryDto;
 import com.example.Project1.BookMyShowBackend.dto.MovieDto;
+import com.example.Project1.BookMyShowBackend.dto.ResponseDto.MovieResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,29 +21,26 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     MovieRepsitory movieRepsitory;
     @Override
-    public MovieDto addMovie(MovieDto movieDto) {
-     // if teh movie is already tehir then we have to throw the excep
-        if(movieDto.getId()<0){
-            throw new EntityNotFoundException("movie can't be found");
-        }
+    public MovieResponseDto addMovie(MovieEntryDto movieEntryDto) {
         List<MovieEntity> list=movieRepsitory.findAll();
         for(MovieEntity movie : list){
-            if(movie.getName().equalsIgnoreCase(movieDto.getName())){
+            if(movie.getName().equalsIgnoreCase(movieEntryDto.getName())){
                 throw new EntityNotFoundException("Record already exists");
             }
         }
 
-        log.info("Adding the movie",movieDto);
-        MovieEntity movieEntity= MovieConvertor.convertDtoToEntity(movieDto);
+        log.info("Adding the movie",movieEntryDto);
+        MovieEntity movieEntity= MovieConvertor.convertDtoToEntity(movieEntryDto);
         movieRepsitory.save(movieEntity);
-        return movieDto;
+        MovieResponseDto movieResponseDto=MovieConvertor.convertEntityToDto(movieEntity);
+        return movieResponseDto;
 
     }
 
     @Override
-    public MovieDto getMovie(int id) {
+    public MovieResponseDto getMovie(int id) {
         MovieEntity movieEntity=movieRepsitory.findById(id).get();
-        MovieDto movieDto=MovieConvertor.convertEntityToDto(movieEntity);
-        return movieDto;
+        MovieResponseDto movieResponseDto=MovieConvertor.convertEntityToDto(movieEntity);
+        return movieResponseDto;
     }
 }
