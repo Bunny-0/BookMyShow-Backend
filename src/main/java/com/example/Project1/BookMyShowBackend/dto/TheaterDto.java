@@ -2,6 +2,8 @@ package com.example.Project1.BookMyShowBackend.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,5 +15,5 @@ public class TheaterDto {
     String name;
     String address;
     String city;
-    ShowDto showDto;
+    List<ShowDto> showDtoList;
 }

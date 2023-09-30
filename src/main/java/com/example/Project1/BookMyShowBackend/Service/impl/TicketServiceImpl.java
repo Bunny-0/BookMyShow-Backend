@@ -64,6 +64,8 @@ public class TicketServiceImpl implements TicketService {
         //connect in the show and
         //showEntity.setTickets()
         //userEntity.setTicket()
+        show.getTickets().add(ticketEntity);
+        user.getTicketEntities().add(ticketEntity);
         ticketEntity=ticketRepository.save(ticketEntity);
         return TicketConvertor.convertEntityToDto(ticketEntity);
 
